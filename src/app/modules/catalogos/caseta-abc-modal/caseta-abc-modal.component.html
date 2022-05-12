@@ -1,0 +1,44 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <!-- Main -->
+    <div class="flex items-center justify-center p-6 sm:p-10">
+        <div class="flex flex-col flex-auto min-w-0" ngxUiLoaderBlurred>
+            <div class="mt-2 text-2xl sm:text-6xl font-extrabold tracking-tight leading-tight pb-4">
+                Detalles de Geocerca
+            </div>
+            <div class="flex items-center justify-center">
+                <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript min-w-full">
+                    <mat-icon matPrefix [svgIcon]="'heroicons_outline:search'">
+                    </mat-icon>
+                    <input  type="text"
+                            matInput
+                            Name = "Nombre"
+                            [(ngModel)] = "sm.nombre"
+                            #Nombre = "ngModel"
+                            (ngModelChange) = "obtenerListaGeocerca()"
+                            [matAutocomplete]="auto"
+                            [placeholder]="'Buscar Geocerca...'">
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let item of geocercas" [value]="item.id" (click)="obtenerGeocerca(item.id)">
+                            {{item.nombre}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </div>
+
+            <azure-map [center]="center" [zoom]="zoom" [dataSources]="[dataSourceGeocerca]" (onReady)="mapReady()" class="mapa-caseta pt-10 pb-10 pl-18">
+                <map-polygon-layer dataSourceId="source" [fillColor]="fillColor" [fillOpacity]="fillOpacity">
+                </map-polygon-layer>
+                
+            </azure-map>
+            
+            <div class="flex justify-end gap-2">
+                <button mat-button class="py-2 px-4 m-2 rounded-md text-white" style="background-color: #475569" (click)="selecciona(id)" type="submit">
+                    Seleccionar
+                </button>
+                <button mat-button class="py-2 px-4 m-2 rounded-md bg-orange-400 text-black" type="button" (click)="regresarCancelar()">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

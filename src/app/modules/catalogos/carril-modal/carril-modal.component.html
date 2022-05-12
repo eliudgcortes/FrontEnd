@@ -1,0 +1,50 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <!-- Main -->
+    <div class="flex flex-col flex-auto items-center p-6 sm:p-10">
+        <div class="flex flex-col flex-auto min-w-0" ngxUiLoaderBlurred>
+            <div class="mt-2 text-2xl sm:text-6xl font-extrabold tracking-tight leading-tight">
+                Detalles del Carril
+            </div>
+
+            <div class="p-4 flex">
+                <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-2"></div>
+            </div>
+            <div class="flex gap-2">
+                <mat-form-field class="w-full">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput [(ngModel)]="modeloCarril.nombre" name="nombre" #nombre="ngModel" value="" required>
+                </mat-form-field>
+            </div>
+            <div class="flex gap-2">
+                <mat-form-field class="w-full">
+                    <mat-label>Alias Iave</mat-label>
+                    <input matInput [(ngModel)]="modeloCarril.aliasIave" name="aliasIave" #aliasIave="ngModel" value="">
+                </mat-form-field>
+            </div>
+            <div class="flex gap-2">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Descripción</mat-label>
+                    <textarea class="campo-ticket-descripcion" matInput [(ngModel)]="modeloCarril.descripcion"
+                        name="descripcion" #descripcion="ngModel" maxlength="300" placeholder="Descripción"
+                        value="">
+                      </textarea>
+                    <mat-hint align="end">{{modeloCarril.descripcion.length}} / 300</mat-hint>
+                </mat-form-field>
+            </div>
+
+            <div class="-ml-4 sm:mt-8 flex items-center justify-end gap-2">
+                <button mat-button class="py-2 px-4 m-2 rounded-md text-white"
+                    style="background-color: #475569"
+                    type="button"
+                    (click)="guardar()"
+                    >
+                    Guardar
+                </button>
+                <button mat-button class="py-2 px-4 m-2 rounded-md bg-orange-400 text-black" type="button"
+                    (click)="regresarCancelar()">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

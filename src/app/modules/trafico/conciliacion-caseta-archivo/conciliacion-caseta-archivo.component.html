@@ -1,0 +1,100 @@
+<div class="flex flex-col flex-auto min-w-0"  ngxUiLoaderBlurred>
+
+    <!-- Header -->
+    <div class="bg-gray-600" style="background-color: #5c616f!important;">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 mt-2 mb-12">
+                <div class="flex flex-auto items-center min-w-0">
+                    <div class="flex flex-col min-w-0 ml-4">
+                        <div class="text-xl text-white tracking-normal">
+                           Importar Archivo
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main  -->
+    <div class="flex-auto">
+        <div class="w-11/12 -m-10 max-w-screen-xl mx-auto">
+            <div class="p-4 shadow rounded-2xl bg-white">
+                <div class="p-4 flex justify-end">
+                    <div>
+                        <label for="myFile" class="mat-button py-2 px-4 m-2 rounded-md bg-gray-600 text-white" mat-stroked-button>
+                            <span> Instrucciones Archivo </span>
+                        </label><br>
+                        <!-- <input type="file" id="myFile" (change)="onFileChange($event)" (click)="fileClick($event)" accept =".xlsx,.xls" style="display: none;"> -->
+                    </div>
+                    <div>
+                        <label for="myFile" class="mat-button py-2 px-4 m-2 rounded-md bg-gray-600 text-white" mat-stroked-button>
+                            <span> Descargar Plantilla </span>
+                        </label><br>
+                        <!-- <input type="file" id="myFile" (change)="onFileChange($event)" (click)="fileClick($event)" accept =".xlsx,.xls" style="display: none;"> -->
+                    </div>
+                </div>
+
+                <div class="pb-4">
+                </div>
+
+                <div class="container" appDnd (fileDropped)="onFileDropped($event)">
+                    <input type="file" for="myFile" #fileDropRef id="fileDropRef" multiple (change)="onFileChange($event)" (click)="fileClick($event)" accept =".xlsx,.xls"/>
+                    <!-- <input type="file" id="myFile" (change)="onFileChange($event)" (click)="fileClick($event)" accept =".xlsx,.xls" style="display: none;"> -->
+                    <!-- (change)="fileBrowseHandler($event.target.files)" -->
+                        <!-- <img src="assets/img/backgrounds/upload.jpg" alt=""> -->
+                        <!-- <button width="32px" alt="">
+                            <span class="material-icons" style="color: #475569;">
+                                file_upload
+                            </span>
+                        </button> -->
+                        <h3 class="pb-6 pt-5">Arrastra/Suelta El Archivo Aquí</h3>
+                    <label for="fileDropRef" class="py-2 px-4 m-2 rounded-md bg-orange-400 text-black" mat-stroked-button>
+                        Buscar Archivo
+                    </label>
+                </div>
+                <div class="files-list">
+                    <div class="single-file" *ngFor="let file of files; let i = index">
+                        <!-- <img src="assets/img/backgrounds/file.jpg" width="45px" alt="file"> -->
+                        <button width="20px" alt="file">
+                            <span class="material-icons pr-24" style="color: #475569;">
+                                insert_drive_file
+                            </span>
+                        </button>
+
+                        <div class="info">
+                        <h4 class="name">
+                            {{ file?.name }}
+                        </h4>
+                        <p class="size">
+                            {{ formatBytes(file?.size) }}
+                        </p>
+                        <app-progress [progress]="file?.progress"></app-progress>
+                        </div>
+
+                        <!-- <img src="assets/img/backgrounds/delete.png" class="delete" width="20px" alt="file" (click)="deleteFile(i)">                        -->
+                        <button class="delete" width="20px" alt="file" (click)="deleteFile(i)">
+                            <span class="material-icons pr-24" style="color: #475569;">
+                                delete
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- <div class="progress-cont">
+                    <div class="progress" [style.width]="progress + '%'">
+                    </div>
+                </div> -->
+
+                <div class="p-4 flex justify-end">
+                    <button class="py-2 px-4 m-2 rounded-md bg-gray-600 text-white" (click)="guardarConciliacionCasetaArchivo()" type="button" mat-stroked-button>
+                        Guardar
+                    </button>
+                    <button
+                        class="py-2 px-4 m-2 rounded-md bg-orange-400 text-black" [routerLink]="'/trafico/ConciliacionCasetaAbc'" type="button" mat-stroked-button>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

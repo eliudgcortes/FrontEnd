@@ -1,0 +1,6 @@
+<div class="mat-title">{{confirmTitle}}</div>
+<div>{{confirmMessage}}</div>
+<div class="mat-action-list pt-8">
+    <button mat-raised-button class="py-2 px-4 m-2 rounded-md bg-orange-400 text-black mat-raised-button mat-button"  (click)="dialogRef.close(true)">Confirmar</button>
+    <button class="py-2 px-4 m-2 rounded-md text-black mat-basic-button" (click)="dialogRef.close(false)">Cancelar</button>
+</div>

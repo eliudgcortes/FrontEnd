@@ -1,0 +1,48 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <!-- Main -->
+    <div class="flex flex-col flex-auto items-center p-6 sm:p-10">
+        <div class="flex flex-col flex-auto min-w-0" ngxUiLoaderBlurred>
+            <div class="mt-2 text-2xl pb-5 sm:text-6xl font-extrabold tracking-tight leading-tight">
+                Agregar Campo Ticket
+            </div>
+
+            <div class="campo-ticket">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Nombre</mat-label>
+                    <input class="input-campo" matInput required name="nombreCampoTicket" #nombre="ngModel"
+                        [(ngModel)]="modeloTicket.nombre" placeholder="Ex. Nombre" value="">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Descripción</mat-label>
+                    <textarea class="campo-ticket-descripcion" matInput [(ngModel)]="modeloTicket.descripcion"
+                        name="descripcionTicket" #descripcion="ngModel" maxlength="300" placeholder="Descripción"
+                        value="">
+                    </textarea>
+                    <mat-hint align="end">{{modeloTicket.descripcion.length}} / 300</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Tipo de Dato</mat-label>
+                    <mat-select name="TipoDato" #TipoDato="ngModel" [(ngModel)]="modeloTicket.tipoDatoId">
+                        <mat-option *ngFor="let tipoDato of tiposDato" [value]="tipoDato.id">
+                            {{tipoDato.nombreListaGenerica}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="p-4 flex justify-end">
+                <button class="py-2 px-4 m-2 rounded-md bg-gray-600 text-white" type="button" (click)="guardar()"
+                    [disabled]="modeloTicket.id > 0">
+                    Guardar
+                </button>
+                <button class="py-2 px-4 m-2 rounded-md bg-orange-400 text-black" type="button" (click)="regresar()">
+                    Cancelar
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+<div class="flex flex-col flex-auto min-w-0"  ngxUiLoaderBlurred>
+    <!-- Header -->
+    <div class="bg-gray-600" style="background-color: #5c616f!important;">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 mt-2 mb-12">
+                <div class="flex flex-auto items-center min-w-0">
+                    <div class="flex flex-col min-w-0 ml-4">
+                        <div class="text-xl text-white tracking-normal">
+                            <!-- CREAR EVENTO -->
+                            <span *ngIf = "modeloEvento.id == 0">Evento</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main  -->
+    <div class="flex-auto">
+        <div class="w-11/12 -m-10 max-w-screen-xl mx-auto">
+            <!-- Alert -->
+            <!-- <fuse-alert
+                class="mt-8 -mb-4"
+                *ngIf="showAlert"
+                [appearance]="'outline'"
+                [showIcon]="false"
+                [type]="alert.type"
+                [@shake]="alert.type === 'error'">
+                {{alert.message}}
+            </fuse-alert> -->
+
+            <form #form_f="ngForm" >
+                <div class="p-4 shadow rounded-2xl bg-white">
+
+                    <div class="flex">
+                        <div class="w-full flex items-center justify-between pt-2">
+                            <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4 gap-6">
+                                
+                            </div>
+                            <div class="cursor-pointer flex items-center justify-center border rounded-md px-4 py-2" [routerLink]="'/seguridad/perfil-abc'">
+                                <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                </svg> -->
+                                <span class="material-icons h-6 w-6 text-orange-400">
+                                    search
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="p-4 flex justify-end">
+                         
+                    </div> -->                    
+                    
+                    <mat-form-field class="p-6 input" appearance="outline">
+                        <mat-label>Numero Economico</mat-label>
+                        <input class="input" matInput [(ngModel)]="modeloEvento.nombre" name="nombre" #nombre="ngModel" value=""/>
+                    </mat-form-field>
+
+                    <mat-form-field class="p-6 input-descripcion" appearance="outline">
+                        <mat-label>Estatus de Cruce</mat-label>
+                        <mat-select name="EstatusCruce">
+                            <mat-option selected>
+                                Seleccione
+                            </mat-option>
+                            <mat-option * [value]="metodo.id">
+                                {{metodo.nombreListaGenerica}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    
+                    <mat-form-field class="p-6" appearance="outline">
+                        <mat-label>Fecha de Cruce</mat-label>
+                        <mat-date-range-input [rangePicker]="picker">
+                            <input matStartDate placeholder="Inicio Fecha">
+                            <input matEndDate placeholder="Fin Fecha">
+                        </mat-date-range-input>
+                        <mat-hint>De: MM/DD/YYYY – A: MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+                                    
+                    <div fxLayout="row wrap" class="px-24">
+                        <div fxFlex="30">
+                            <mat-divider>
+                            </mat-divider>
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+
+                    </div>
+                                                                                                 
+                    <div class="p-4 flex justify-end">
+                        <button class="py-2 px-4 m-2 rounded-md bg-gray-600 text-white" type="button" mat-stroked-button>
+                            Guardar
+                        </button>
+                        <button
+                            class="py-2 px-4 m-2 rounded-md bg-orange-400 text-black" [routerLink]="'/trafico'" type="button" mat-stroked-button>
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,196 @@
+<div class="flex flex-col flex-auto min-w-0"  ngxUiLoaderBlurred>
+    <!-- Header -->
+    <div class="bg-gray-600" style="background-color: #5c616f!important;">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 mt-2 mb-12">
+                <div class="flex flex-auto items-center min-w-0">
+                    <div class="flex flex-col min-w-0 ml-4">
+                        <div class="text-xl text-white tracking-normal">
+                            Conciliación Caseta
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main  -->
+    <div class="flex-auto">
+        <div class="w-11/12 -m-10 max-w-screen-xl mx-auto">
+            <div class="p-4 shadow rounded-2xl bg-white">
+                <div class="flex">
+                    <div class="w-full flex items-center justify-between pt-2">
+                        <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4 gap-6">
+                            <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript min-w-100">
+                                <input matInput placeholder="Buscar Conciliación Caseta..." (keyup)="aplicarFiltro($event.target.value.toLocaleLowerCase())">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </mat-form-field>
+                        </div>
+                        <div class="cursor-pointer flex items-center justify-center border rounded-md px-4 py-2" [routerLink]="'/trafico/ConciliacionCasetaAbc'">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <table mat-table [dataSource]="dataSource" class="w-full" matSort>
+                        <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Id
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.id }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="periodo">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Periodo
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.claveRed }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="periodoProveedor">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Periodo Proveedor
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.claveRed }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="tipoPeriodoProveedor">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Periodo Proveedor Tipo
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.claveRed }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="claveRed">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Clave Red
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.claveRed }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="empresa">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Empresa
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.empresaId }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="conciliados">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Conciliados
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.claveRed }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="conDiferencia">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Con Diferencia
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.claveRed }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="totalSinDiferencia">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Total Sin Diferencia
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.claveRed }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="totalConDiferencia">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Total Con Diferencia
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.claveRed }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="conciliacionMensual">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Conciliacion Mensual
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.claveRed }}
+                            </td>
+                        </ng-container>
+                        <!-- <ng-container matColumnDef="fechaAlta">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Fecha Alta
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.fechaAlta }}
+                            </td>
+                        </ng-container> -->
+                        <ng-container matColumnDef="inicioPeriodo">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Inicio Período
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.fechaInicio }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="finPeriodo">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Fin Período
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.fechaFin }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="estatus">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Estatus
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.claveRed }}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="accion">
+                            <th mat-header-cell *matHeaderCellDef>
+                                Acción
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                <button mat-icon-button [matMenuTriggerFor]="menu">
+                                    <span style="color: black" class="material-icons">
+                                        list
+                                    </span>
+                                </button>
+                                <mat-menu #menu="matMenu">
+                                    <button mat-menu-item [routerLink]="'/trafico/ConciliacionCasetaAbc/'+ element.id">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
+                                        <span>Editar</span>
+                                    </button>
+                                    <button mat-menu-item (click)="eliminar(element.id)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                        <span>Eliminar</span>
+                                    </button>
+                                </mat-menu>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="cols"></tr>
+                        <tr mat-row *matRowDef="let row; columns: cols;"></tr>
+                    </table>
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]"
+                        showFirstLastButtons
+                        aria-label="Select page of periodic elements">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,531 @@
+<div class="flex flex-col flex-auto min-w-0"  ngxUiLoaderBlurred>
+    <!-- Header -->
+    <div class="bg-gray-600" style="background-color: #5c616f!important;">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 mt-2 mb-12">
+                <div class="flex flex-auto items-center min-w-0">
+                    <div class="flex flex-col min-w-0 ml-4">
+                        <div class="text-xl text-white tracking-normal">
+                            <!-- CREAR CONCILIACION CASETA ABC -->
+                            <span *ngIf="modeloCaseta.id == 0">Crear Conciliación Caseta</span>
+                            <span *ngIf="modeloCaseta.id != 0">Editar Conciliación Caseta</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main  -->
+    <div class="flex-auto">
+        <div class="w-11/12 -m-10 max-w-screen-xl mx-auto">
+            <form #form_f="ngForm" >
+                <mat-tab-group mat-stretch-tabs class="p-4 shadow rounded-2xl bg-white">
+                    <!-- Conciliacion Caseta "Entidad Archivo" -->
+                    <mat-tab label="Conciliación Caseta">
+                        <div class="p-4 flex justify-end">
+                            <div>
+                                <label for="myFile" class="mat-button py-2 px-4 m-2 rounded-md bg-gray-600 text-white" [routerLink]="'/trafico/ConciliacionCasetaArchivo/' + idCaseta" mat-stroked-button>
+                                    <span> Importar Archivo </span>
+                                </label><br>
+                                <!-- <input type="file" id="myFile" (change)="onFileChange($event)" (click)="fileClick($event)" accept =".xlsx,.xls" style="display: none;"> -->
+                            </div>                            
+                        </div>
+
+                        <div class="p-6 flex justify-end">
+                            <mat-form-field class="p-6 input" appearance="outline" style="font-size: 14px;width: 100%;">
+                                <mat-label style="color: black;">Inicio</mat-label>
+                                <input type="date" matInput [(ngModel)]="modeloCaseta.fechaInicio" [ngModelOptions]="{standalone: true}">
+                            </mat-form-field>
+                            <mat-form-field class="p-6 input" appearance="outline" style="font-size: 14px;width: 100%;">
+                                <mat-label style="color: black;">Fin</mat-label>
+                                <input type="date" matInput [(ngModel)]="modeloCaseta.fechaFin" [ngModelOptions]="{standalone: true}">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="p-6 flex justify-between">
+                            <mat-form-field class="p-6 input-descripcion" appearance="outline">
+                                <mat-label>Clave de Red</mat-label>
+                                <input class="input" matInput [(ngModel)]="modeloCaseta.claveRed" name="claveRed" #nombre="ngModel" value="">
+                            </mat-form-field>
+                            <mat-form-field class="p-6 input" appearance="outline">
+                                <mat-label>Empresa</mat-label>
+                                <input class="input" matInput [(ngModel)]="modeloCaseta.empresaId" name="empresaId" #nombre="ngModel" value="">
+                            </mat-form-field>
+                            <mat-form-field class="p-6 input-descripcion" appearance="outline">
+                                <mat-label>Periodo</mat-label>
+                                <mat-select name="Periodo">
+                                    <mat-option selected>
+                                        Seleccione
+                                    </mat-option>
+                                    <mat-option * [value]="metodo.id">
+                                        {{metodo.nombreListaGenerica}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="p-6 input-descripcion" appearance="outline">
+                                <mat-label>Periodo Proveedor</mat-label>
+                                <input class="input" matInput [(ngModel)]="modeloCaseta.fechaAlta" name="claveRed" #nombre="ngModel" value="">
+                            </mat-form-field>
+                            <mat-form-field class="p-6 input-descripcion" appearance="outline">
+                                <mat-label>Tipo Periodo Proveedor</mat-label>
+                                <input class="input" matInput [(ngModel)]="modeloCaseta.fechaAlta" name="claveRed" #nombre="ngModel" value="">
+                            </mat-form-field>
+                        </div>                                                
+                        <div fxLayout="row wrap" class="px-24">
+                            <div fxFlex="30">
+                                <mat-divider>
+                                </mat-divider>
+                            </div>
+                        </div>
+
+                        <mat-label class="p-6 text-gray" style="font-weight: 500; color: gray; font-size: 14px">
+                            Archivo:
+                        </mat-label>
+                        <div fxLayout="row wrap" class="px-24">
+                            <div fxFlex="30">
+                                <mat-divider>
+                                </mat-divider>
+                            </div>
+                        </div>
+
+                        <div class="p-4 flex justify-end">
+                            <button class="py-2 px-4 m-2 rounded-md bg-gray-600 text-white" (click)="guardarConciliacionCaseta()" type="button" mat-stroked-button>
+                                Guardar
+                            </button>
+                            <button
+                                class="py-2 px-4 m-2 rounded-md bg-orange-400 text-black" [routerLink]="'/trafico/ConciliacionCaseta'" type="button" mat-stroked-button>
+                                Cancelar
+                            </button>
+                        </div>
+
+                        <!-- <div class="flex-auto mt1 rounded-2xl shadow bg-card p-8" *ngIf="this.modeloArchivo.id > 0">
+                            <div style="display: flex;">
+                              <mat-panel-description class="titulo-ticket">
+                                Carriles
+                              </mat-panel-description>
+                              <div class="p-4 flex justify-end" style="margin-left: 80%; margin-top: -2.5rem; margin-right: 1.5rem;">
+                                <button class="py-2 px-4 m-2 rounded-md bg-gray-600 text-white" type="button" (click)="carrilModal(0)"
+                                  mat-stroked-button>
+                                  Agregar Carril
+                                </button>
+                              </div>
+                            </div>
+                    
+                            <ng-container *ngFor="let carril of resultadosCarril">
+                                <div fxLayout="row wrap">
+                                    <div fxFlex="100">
+                                        <fuse-widget class="" fxLayout="column" fxFlex="100">
+                                            <div class="fuse-widget-front mat-elevation-z2">
+                                            <div fxLayout="column" fxLayoutAlign="center start">
+                                                    <table style="width: 100%;" class="pt-12">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="width:90%">
+                                
+                                                                    <div class="px-6 pt-6">
+                                                                    <span fxLayout="row">
+                                                                        <a style="color: #464646;"><b>{{carril.nombre}}</b></a>
+                                                                    </span>
+                                        
+                                                                    <div class="justify-end pb-5" style="float: right;">
+                                                                        <button class="py-2 px-4 m-2 rounded-md bg-gray-600 text-white" type="button"
+                                                                        (click)="duplicarCarrilDialog(carril.id)" mat-stroked-button>
+                                                                        Duplicar Carril
+                                                                        </button>
+                                                                    </div>
+                                        
+                                                                    <div style="float: right; width: 10%; margin-top: 1.5rem; display: flex;">
+                                                                        <button mat-icon-button color="primary" (click)="carrilModal(carril.id)">
+                                                                        <mat-icon>edit</mat-icon>
+                                                                        </button>
+                                        
+                                                                        <button mat-icon-button color="warn" (click)="eliminarCarrilDialog(carril)">
+                                                                        <mat-icon>delete</mat-icon>
+                                                                        </button>
+                                                                    </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </fuse-widget>
+                                    </div>
+                                </div>
+                            </ng-container>   
+                        </div> -->
+                    </mat-tab>
+                    <!-- Cruces "Entidad Evento" -->
+                    <mat-tab label="Cruces">
+                        <div class="flex">
+                            <div class="w-full flex items-center justify-between pt-2">
+                                <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4 gap-6">
+                                </div>
+                                <div class="cursor-pointer flex items-center justify-center border rounded-md px-4 py-2" [routerLink]="'/trafico/Inicio'">
+                                    <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                    </svg> -->
+                                    <span class="material-icons h-6 w-6 text-orange-400">
+                                        search
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="p-6 flex justify-end">
+                        </div>                     -->
+
+                        <div class="p-6 flex justify-between">
+                            <!-- <mat-form-field class="p-6" appearance="outline">
+                                <mat-label>Fecha de Cruce</mat-label>
+                                <mat-date-range-input [rangePicker]="picker">
+                                    <input matStartDate placeholder="Inicio Fecha">
+                                    <input matEndDate placeholder="Fin Fecha">
+                                </mat-date-range-input>
+                                <mat-hint>De: MM/DD/YYYY – A: MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-date-range-picker #picker></mat-date-range-picker>
+                            </mat-form-field>     -->
+                            <mat-form-field class="input" appearance="outline" style="font-size: 14px;width: 100%;">
+                                <mat-label style="color: black;">Inicio</mat-label>
+                                <input type="date" matInput [(ngModel)]="modeloCaseta.fechaInicio" [ngModelOptions]="{standalone: true}">
+                            </mat-form-field>
+                            <mat-form-field class="input" appearance="outline" style="font-size: 14px;width: 100%;">
+                                <mat-label style="color: black;">Fin</mat-label>
+                                <input type="date" matInput [(ngModel)]="modeloCaseta.fechaFin" [ngModelOptions]="{standalone: true}">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="p-6 flex justify-between">
+                            <mat-form-field class="input-descripcion" appearance="outline">
+                                <mat-label>Tipo Conciliación</mat-label>
+                                <mat-select name="tipoConciliacion">
+                                    <mat-option selected>
+                                        Seleccione
+                                    </mat-option>
+                                    <mat-option * [value]="metodo.id">
+                                        {{metodo.nombreListaGenerica}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="input-descripcion" appearance="outline">
+                                <mat-label>Archivo Cargado</mat-label>
+                                <mat-select name="archivoCargado">
+                                    <mat-option selected>
+                                        Seleccione
+                                    </mat-option>
+                                    <mat-option * [value]="metodo.id">
+                                        {{metodo.nombreListaGenerica}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="input-descripcion" appearance="outline">
+                                <mat-label>Origen</mat-label>
+                                <mat-select name="origen">
+                                    <mat-option selected>
+                                        Seleccione
+                                    </mat-option>
+                                    <mat-option * [value]="metodo.id">
+                                        {{metodo.nombreListaGenerica}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>   
+                        </div>
+
+                        <div class="p-6 flex justify-between">
+                            <mat-form-field class="input" appearance="outline">
+                                <mat-label>Número Económico</mat-label>
+                                <input class="input" matInput [(ngModel)]="modeloEvento.nombre" name="numeroEconomico" #nombre="ngModel" value=""/>
+                            </mat-form-field>
+                            <mat-form-field class="input-descripcion" appearance="outline">
+                                <mat-label>Tractor</mat-label>
+                                <mat-select name="tractor">
+                                    <mat-option selected>
+                                        Seleccione
+                                    </mat-option>
+                                    <mat-option * [value]="metodo.id">
+                                        {{metodo.nombreListaGenerica}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="input-descripcion" appearance="outline">
+                                <mat-label>Estatus de Cruce</mat-label>
+                                <mat-select name="estatusCruce">
+                                    <mat-option selected>
+                                        Seleccione
+                                    </mat-option>
+                                    <mat-option * [value]="metodo.id">
+                                        {{metodo.nombreListaGenerica}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="input-descripcion" appearance="outline">
+                                <mat-label>Diferencia</mat-label>
+                                <mat-select name="diferencia">
+                                    <mat-option selected>
+                                        Seleccione
+                                    </mat-option>
+                                    <mat-option * [value]="metodo.id">
+                                        {{metodo.nombreListaGenerica}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>      
+                        
+                        <div fxLayout="row wrap" class="px-24">
+                            <div fxFlex="30">
+                                <mat-divider>
+                                </mat-divider>
+                            </div>
+                        </div>
+
+                        <div>
+                            <table mat-table [dataSource]="dataSource" class="w-full" matSort>
+                                <ng-container matColumnDef="conciliado">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        # Conciliado
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.id }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="origen">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Origen
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.id }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="tractor">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Tractor
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.id }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="tag">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Tag
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.id }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="fecha">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Fecha
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.id }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="hora">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Hora
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.id }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="caseta">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Caseta
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.id }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="carril">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Carril
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.id }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="ejes">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Ejes
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.id }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="importe">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Importe
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.id }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="ejesConciliacion">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Ejes Conciliación
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.id }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="carrilConciliacion">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Carril Conciliación
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.id }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="importeConciliacion">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Importe Conciliación
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.id }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="motivoDiferencia">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Motivo Diferencia
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.id }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="estatus">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                        Estatus
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{ element.id }}
+                                    </td>
+                                </ng-container>
+                                <ng-container matColumnDef="accion">
+                                    <th mat-header-cell *matHeaderCellDef>
+                                        Acción
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <button mat-icon-button [matMenuTriggerFor]="menu">
+                                            <span style="color: black" class="material-icons">
+                                                list
+                                            </span>
+                                        </button>
+                                        <mat-menu #menu="matMenu">
+                                            <button mat-menu-item [routerLink]="'/trafico/ConciliacionCasetaAbc/'+ element.id">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                </svg>
+                                                <span>Editar</span>
+                                            </button>
+                                            <button mat-menu-item (click)="eliminar(element.id)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                                <span>Eliminar</span>
+                                            </button>
+                                        </mat-menu>
+                                    </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="cols"></tr>
+                                <tr mat-row *matRowDef="let row; columns: cols;"></tr>
+                            </table>
+                            <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]"
+                                showFirstLastButtons
+                                aria-label="Select page of periodic elements">
+                            </mat-paginator>
+                        </div>
+
+
+
+                        <div class="p-6">
+                        </div>                                                                    
+                        <div class="p-4 flex justify-end">
+                            <button class="py-2 px-4 m-2 rounded-md bg-gray-600 text-white" type="button" mat-stroked-button>
+                                Guardar
+                            </button>
+                            <button class="py-2 px-4 m-2 rounded-md bg-orange-400 text-black" [routerLink]="'/trafico/ConciliacionCaseta'" type="button" mat-stroked-button>
+                                Cancelar
+                            </button>
+                        </div>
+                    </mat-tab>
+                    <!-- Geocerca "Entidad Geocerca" -->
+                    <mat-tab label="Geocerca">
+                        <div class="flex">
+                            <div class="w-full flex items-center justify-between pt-2">
+                                <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4 gap-6">
+                                </div>
+                                <div class="cursor-pointer flex items-center justify-center border rounded-md px-4 py-2" [routerLink]="'/trafico/Inicio'">
+                                    <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                    </svg> -->
+                                    <span class="material-icons h-6 w-6 text-orange-400">
+                                        search
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="p-4 flex justify-end">
+                        </div> -->
+
+                        <div class="p-6 flex justify-between">
+                            <mat-form-field class="p-6 input" appearance="outline">
+                                <mat-label>Id Cruce</mat-label>
+                                <input class="input" matInput [(ngModel)]="modeloGeocerca.id" name="id" #nombre="ngModel" value=""/>
+                            </mat-form-field>
+                            <mat-form-field class="p-6 input" appearance="outline">
+                                <mat-label>Número Económico</mat-label>
+                                <input class="input" matInput [(ngModel)]="modeloGeocerca.nombre" name="nombre" #nombre="ngModel" value=""/>
+                            </mat-form-field>
+                            <mat-form-field class="p-6 input-descripcion" appearance="outline">
+                                <mat-label>Estatus de Cruce</mat-label>
+                                <mat-select name="EstatusCruce">
+                                    <mat-option selected>
+                                        Seleccione
+                                    </mat-option>
+                                    <mat-option * [value]="metodo.id">
+                                        {{metodo.nombreListaGenerica}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <!-- <mat-form-field class="p-6" appearance="outline">
+                                <mat-label>Fecha de Cruce</mat-label>
+                                <mat-date-range-input [rangePicker]="picker">
+                                    <input matStartDate placeholder="Incio Fecha">
+                                    <input matEndDate placeholder="Fin Fecha">
+                                </mat-date-range-input>
+                                <mat-hint>De: MM/DD/YYYY – A: MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-date-range-picker #picker></mat-date-range-picker>
+                            </mat-form-field> -->
+                            <mat-form-field class="p-6 input" appearance="outline" style="font-size: 14px;width: 100%;">
+                                <mat-label style="color: black;">Inicio</mat-label>
+                                <input type="date" matInput [(ngModel)]="modeloCaseta.fechaInicio" [ngModelOptions]="{standalone: true}">
+                            </mat-form-field>
+                            <mat-form-field class="p-6 input" appearance="outline" style="font-size: 14px;width: 100%;">
+                                <mat-label style="color: black;">Fin</mat-label>
+                                <input type="date" matInput [(ngModel)]="modeloCaseta.fechaFin" [ngModelOptions]="{standalone: true}">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row wrap" class="px-24">
+                            <div fxFlex="30">
+                                <mat-divider>
+                                </mat-divider>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                        </div>
+                        <div class="p-4 flex justify-end">
+                            <button class="py-2 px-4 m-2 rounded-md bg-gray-600 text-white" type="button" mat-stroked-button>
+                                Guardar
+                            </button>
+                            <button class="py-2 px-4 m-2 rounded-md bg-orange-400 text-black" [routerLink]="'/trafico/ConciliacionCaseta'" type="button" mat-stroked-button>
+                                Cancelar
+                            </button>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </form>
+        </div>
+    </div>
+</div>
